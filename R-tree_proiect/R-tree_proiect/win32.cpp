@@ -44,12 +44,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		LineTo(hDC, x1, x4);
 		LineTo(hDC, x1, x2);
 
-		x1 = 30, x2 = 30, x3 = 548, x4 = 338;
+		/*x1 = 30, x2 = 30, x3 = 548, x4 = 338;
 		MoveToEx(hDC, x1, x2, NULL);
 		LineTo(hDC, x3, x2);
 		LineTo(hDC, x3, x4);
 		LineTo(hDC, x1, x4);
-		LineTo(hDC, x1, x2);
+		LineTo(hDC, x1, x2);*/
 
 
 
@@ -60,31 +60,27 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 	case WM_LBUTTONDOWN:
 	{
-						   int iPosX = LOWORD(lParam);
-						   int iPosY = HIWORD(lParam);
+		 int iPosX = LOWORD(lParam);
+		 int iPosY = HIWORD(lParam);
+         wchar_t waCoord[20];
+	  /*   wsprintf((LPSTR)waCoord, ("(%i, %i)"), iPosX, iPosY);
+	    ::MessageBox(hwnd, (LPCSTR)waCoord, ("Ai ales coordonatele:"), MB_OK);*/
+       {
+        hDC = BeginPaint(hwnd, &Ps);
+	    hDC = GetWindowDC(hwnd);
+	    //TextOut(hDC, iPosX + 7, iPosY + 23, "x",1);
 
-						   wchar_t waCoord[20];
-						   wsprintf((LPSTR)waCoord, ("(%i, %i)"), iPosX, iPosY);
-						   ::MessageBox(hwnd, (LPCSTR)waCoord, ("Ati ales coordonatele:"), MB_OK);
-						   {
+	   char v[7];
+	   itoa(iPosX, v, 10);
 
-
-							   hDC = BeginPaint(hwnd, &Ps);
-							   hDC = GetWindowDC(hwnd);
-							   //TextOut(hDC, iPosX + 7, iPosY + 23, "x",1);
-
-							   char v[7];
-							   itoa(iPosX, v, 10);
-
-							   TextOut(hDC, iPosX + 7, iPosY + 23, v, lung_nr(iPosX));
-							   TextOut(hDC, iPosX + 38, iPosY + 23, ";", 1);
-							   itoa(iPosY, v, 10);
-							   TextOut(hDC, iPosX + 40, iPosY + 23, v, lung_nr(iPosY));
-							   EndPaint(hwnd, &Ps);
-							   ReleaseDC(hwnd, hDC);
+	   TextOut(hDC, iPosX + 7, iPosY + 23, v, lung_nr(iPosX));
+	   TextOut(hDC, iPosX + 38, iPosY + 23, ";", 1);
+ 	   itoa(iPosY, v, 10);
+	   TextOut(hDC, iPosX + 40, iPosY + 23, v, lung_nr(iPosY));
+      EndPaint(hwnd, &Ps);
+	   ReleaseDC(hwnd, hDC);
 						   }
-
-						   break;
+      break;
 	}
 	case WM_CREATE:
 	{HWND hWndButton = CreateWindowEx(NULL,
