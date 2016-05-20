@@ -82,6 +82,7 @@
     <ClInclude Include="rtree.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="ajutor.txt" />
     <Text Include="coord.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

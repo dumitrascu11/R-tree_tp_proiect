@@ -2,11 +2,16 @@
 #include"rtree.h"
 const char g_szClassName[] = "myWindowClass";
 #define IDC_MAIN_BUTTON	101			// Button identifier
-//#define IDC_MAIN_EDIT	102			// Edit box identifier
-///HWND hEdit;
+#define IDC_HELP_BUTTON	102	
+#define IDC_LOCATE_BUTTON 103
+#define IDC_ADRESS_BUTTON 104
+//#define IDC_HELP_EDIT	102			// Edit box identifier
 
+HWND hEdit;
 
-
+int ok_start = 0;
+int poz_x=0 ;
+int poz_y=0 ;
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -28,64 +33,89 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		int x1 = 10, x2 = 10, x3 = 1260, x4 = 680;
 
-		font = CreateFont(8, 5, 0, 0,
+		font = CreateFont(3, 3, 0, 0,
 			FW_NORMAL, FALSE, FALSE, FALSE,
 			ANSI_CHARSET, OUT_DEFAULT_PRECIS,
 			CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
 			DEFAULT_PITCH | FF_ROMAN,
 			"Times New Roman");
 		SelectObject(hDC, font);
-		TextOut(hDC, x1, x2 - 8, "Johnny Carson", 13);
+		TextOut(hDC, 1320, 689, "Johnny", 6);
 		DeleteObject(font);
-
+		///de aici colorez
+		HBRUSH BrushYellow = CreateSolidBrush(RGB(250, 255,0));
+		HBRUSH      NewBrush;	
+		POINT       Pt[4];
+		NewBrush = CreateSolidBrush(RGB(255, 0, 0));
+		SelectObject(hDC, NewBrush);
+		Pt[0].x = x1; Pt[0].y = x2;
+		Pt[1].x = x3; Pt[1].y = x2;
+		Pt[2].x = x3; Pt[2].y = x4;
+		Pt[3].x = x1; Pt[3].y = x4;
+		Polygon(hDC, Pt, 4);
+		DeleteObject(NewBrush);
+	//		SelectObject(hDC, BrushYellow);
+		//	NewBrush = CreateSolidBrush(RGB(255, 255, 255));
+		SelectObject(hDC, NewBrush);
+		x1 = 10; x2 = 10; x3 = 30; x4 = 30;
+		Pt[0].x = x1; Pt[0].y = x2;
+		Pt[1].x = x3; Pt[1].y = x2;
+		Pt[2].x = x3; Pt[2].y = x4;
+		Pt[3].x = x1; Pt[3].y = x4;
+		Polygon(hDC, Pt, 4);
 		MoveToEx(hDC, x1, x2, NULL);
 		LineTo(hDC, x3, x2);
 		LineTo(hDC, x3, x4);
 		LineTo(hDC, x1, x4);
 		LineTo(hDC, x1, x2);
 
-		/*x1 = 30, x2 = 30, x3 = 548, x4 = 338;
-		MoveToEx(hDC, x1, x2, NULL);
-		LineTo(hDC, x3, x2);
-		LineTo(hDC, x3, x4);
-		LineTo(hDC, x1, x4);
-		LineTo(hDC, x1, x2);*/
-
-
-
-
 	}
 	EndPaint(hwnd, &Ps);
 	break; }
 
 	case WM_LBUTTONDOWN:
+	{	if (ok_start == 1)
 	{
-		 int iPosX = LOWORD(lParam);
-		 int iPosY = HIWORD(lParam);
-         wchar_t waCoord[20];
-	  /*   wsprintf((LPSTR)waCoord, ("(%i, %i)"), iPosX, iPosY);
-	    ::MessageBox(hwnd, (LPCSTR)waCoord, ("Ai ales coordonatele:"), MB_OK);*/
-       {
-        hDC = BeginPaint(hwnd, &Ps);
-	    hDC = GetWindowDC(hwnd);
-	    //TextOut(hDC, iPosX + 7, iPosY + 23, "x",1);
+		wchar_t waCoord[20];
+		wsprintf((LPSTR)waCoord, ("(%i, %i)"), LOWORD(lParam), HIWORD(lParam));
+		int msg_return = MessageBox(hwnd, (LPCSTR)waCoord, ("Ai ales coordonatele:"), MB_OKCANCEL);
+		{	if (msg_return == IDOK)
+		{
+			poz_x = LOWORD(lParam);
+			poz_y = HIWORD(lParam);
+			hDC = BeginPaint(hwnd, &Ps);
+			hDC = GetWindowDC(hwnd);
+			TextOut(hDC, poz_x + 7, poz_y + 23, "x", 1);
 
-	   char v[7];
-	   itoa(iPosX, v, 10);
+			/*   char v[7];
+			   itoa(poz_x, v, 10);
 
-	   TextOut(hDC, iPosX + 7, iPosY + 23, v, lung_nr(iPosX));
-	   TextOut(hDC, iPosX + 38, iPosY + 23, ";", 1);
- 	   itoa(iPosY, v, 10);
-	   TextOut(hDC, iPosX + 40, iPosY + 23, v, lung_nr(iPosY));
-      EndPaint(hwnd, &Ps);
-	   ReleaseDC(hwnd, hDC);
-						   }
-      break;
+			   TextOut(hDC, poz_x + 7, poz_y + 23, v, lung_nr(poz_x));
+			   TextOut(hDC, poz_x + 38, poz_y + 23, ";", 1);
+			   itoa(poz_y, v, 10);
+			   TextOut(hDC, poz_x + 40, poz_y + 23, v, lung_nr(poz_y));
+			   EndPaint(hwnd, &Ps);*/
+			ReleaseDC(hwnd, hDC);
+		}
+		if (msg_return == IDCANCEL)
+		{
+			int poz_x = 0;
+			int poz_y = 0;
+		}
+
+		}
+
+	}
+	else MessageBox(NULL,
+		(LPCSTR)"Nu ai citit Instructiunile!",
+		"Atentie!!!",
+		MB_ICONERROR);
+	break;
 	}
 	case WM_CREATE:
-	{HWND hWndButton = CreateWindowEx(NULL,
+	{/*HWND hWndButton = */CreateWindowEx(NULL,
 		"BUTTON",
-		"Start",
+		"Start!",
 		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
 		1265,
 		10,
@@ -95,30 +125,103 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		(HMENU)IDC_MAIN_BUTTON,
 		GetModuleHandle(NULL),
 		NULL);
+	CreateWindowEx(NULL,
+		"BUTTON",
+		"Localizare",
+		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+		1265,
+		50,
+		80,
+		24,
+		hwnd,
+		(HMENU)IDC_LOCATE_BUTTON,
+		GetModuleHandle(NULL),
+		NULL);
+	CreateWindowEx(NULL,
+		"BUTTON",
+		"Adresa",
+		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+		1265,
+		90,
+		80,
+		24,
+		hwnd,
+		(HMENU)IDC_ADRESS_BUTTON,
+		GetModuleHandle(NULL),
+		NULL);
+	CreateWindowEx(NULL,
+		"BUTTON",
+		"Ajutor!",
+		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+		1265,
+		130,
+		80,
+		24,
+		hwnd,
+		(HMENU)IDC_HELP_BUTTON,
+		GetModuleHandle(NULL),
+		NULL);
+
 
 	}
 		break;
 	case WM_COMMAND:
-	{	case IDC_MAIN_BUTTON:
-	{	hDC = BeginPaint(hwnd, &Ps);
+	{ switch (wParam)
+	{
+	case IDC_MAIN_BUTTON:
+	{	HFONT	    font;
+	hDC = BeginPaint(hwnd, &Ps);
 	hDC = GetWindowDC(hwnd);
-	/**char buffer[256];
-	SendMessage(hEdit,
-	WM_GETTEXT,
-	sizeof(buffer)/sizeof(buffer[0]),
-	reinterpret_cast<LPARAM>(buffer));
-	MessageBox(NULL,
-	"Felicitari!!!",
-	"Information",
-	MB_ICONINFORMATION);*/
 	root = radacina("coord.txt");
 
 	afisare_arbore(root, hDC);
+	ok_start = 1;
 	EndPaint(hwnd, &Ps);
 	ReleaseDC(hwnd, hDC);
+	break; }
 
+	case IDC_HELP_BUTTON:
+	{	char buffer[256];
+	SendMessage(hEdit,
+		WM_GETTEXT,
+		sizeof(buffer) / sizeof(buffer[0]),
+		reinterpret_cast<LPARAM>(buffer));
+	MessageBox(NULL,
+		(LPCSTR)fisier_help("ajutor.txt"),
+		"Ajutor",
+		MB_ICONINFORMATION);
+	break; }
+	case IDC_LOCATE_BUTTON:
+	{if (poz_x != 0 && poz_y != 0)
+
+	{
+		MessageBox(NULL,
+			(LPCSTR)nume_localizare(root, poz_x, poz_y),
+			"Zona in care te aflii este:",
+			MB_ICONINFORMATION);
 	}
-		break; }break;
+	else MessageBox(NULL,
+		(LPCSTR)"Nu ai citit Instructiunile!",
+		"Atentie!!!",
+		MB_ICONERROR);
+	}	break;
+	
+	case IDC_ADRESS_BUTTON:
+	{if (poz_x != 0 && poz_y != 0)
+
+	{
+		MessageBox(NULL,
+			(LPCSTR)nume_adresa(root, poz_x, poz_y),
+			"Adresa zonei in care te aflii este:",
+			MB_ICONINFORMATION);
+	}
+	 else MessageBox(NULL,
+		(LPCSTR)"Nu ai citit Instructiunile!",
+		"Atentie!!!",
+		MB_ICONERROR);
+	}
+	break; }
+	}break;
 	case WM_DESTROY:
 		PostQuitMessage(WM_QUIT);
 		break;
@@ -165,7 +268,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		g_szClassName,
 		"R-tree Application",
 		WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, 240, 120,
+		CW_USEDEFAULT, CW_USEDEFAULT, 1366, 768,
 		NULL, NULL, hInstance, NULL);
 
 	if (hwnd == NULL)

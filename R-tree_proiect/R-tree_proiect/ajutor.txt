@@ -1,0 +1,4 @@
+1.Apasa butonul "Start" pentru a desena harta.
+2.Apasa click-stanga in ferestra pentru a te localiza.
+3.Apasa butonul "Localizare" pentru a afla zona in care te afli.
+4.Apasa butonul "Adresa" pentru a afla mai multe detalii despre zona in care te afli.

@@ -28,5 +28,8 @@
     <Text Include="coord.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="ajutor.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
