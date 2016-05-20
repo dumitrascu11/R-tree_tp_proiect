@@ -1,0 +1,29 @@
+﻿Build started 5/16/2016 12:10:56 AM.
+     1>Project "C:\Users\john\Source\Repos\R-tree_tp_proiect\R-tree_proiect\R-tree_proiect\R-tree_proiect.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt win32.cpp
+         win32.cpp
+     1>c:\users\john\source\repos\r-tree_tp_proiect\r-tree_proiect\r-tree_proiect\rtree.h(22): warning C4091: 'typedef ' : ignored on left of 'rtree' when no variable is declared
+     1>c:\users\john\source\repos\r-tree_tp_proiect\r-tree_proiect\r-tree_proiect\rtree.h(44): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>c:\users\john\source\repos\r-tree_tp_proiect\r-tree_proiect\r-tree_proiect\rtree.h(51): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(230) : see declaration of 'fscanf'
+     1>c:\users\john\source\repos\r-tree_tp_proiect\r-tree_proiect\r-tree_proiect\rtree.h(53): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(230) : see declaration of 'fscanf'
+     1>c:\users\john\source\repos\r-tree_tp_proiect\r-tree_proiect\r-tree_proiect\rtree.h(55): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(230) : see declaration of 'fscanf'
+     1>c:\users\john\source\repos\r-tree_tp_proiect\r-tree_proiect\r-tree_proiect\rtree.h(57): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(230) : see declaration of 'fscanf'
+     1>c:\users\john\source\repos\r-tree_tp_proiect\r-tree_proiect\r-tree_proiect\win32.cpp(74): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdlib.h(937) : see declaration of 'itoa'
+     1>c:\users\john\source\repos\r-tree_tp_proiect\r-tree_proiect\r-tree_proiect\win32.cpp(78): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdlib.h(937) : see declaration of 'itoa'
+     1>c:\users\john\source\repos\r-tree_tp_proiect\r-tree_proiect\r-tree_proiect\win32.cpp(65): warning C4101: 'waCoord' : unreferenced local variable
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\john\Source\Repos\R-tree_tp_proiect\R-tree_proiect\Debug\R-tree_proiect.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\john\Source\Repos\R-tree_tp_proiect\R-tree_proiect\Debug\R-tree_proiect.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\john\Source\Repos\R-tree_tp_proiect\R-tree_proiect\Debug\R-tree_proiect.lib" /MACHINE:X86 Debug\win32.obj
+         R-tree_proiect.vcxproj -> C:\Users\john\Source\Repos\R-tree_tp_proiect\R-tree_proiect\Debug\R-tree_proiect.exe
+     1>Done Building Project "C:\Users\john\Source\Repos\R-tree_tp_proiect\R-tree_proiect\R-tree_proiect\R-tree_proiect.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.17
