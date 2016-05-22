@@ -42,32 +42,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		SelectObject(hDC, font);
 		TextOut(hDC, 1320, 689, "Johnny", 6);
 		DeleteObject(font);
-		///de aici colorez
-		HBRUSH BrushYellow = CreateSolidBrush(RGB(250, 255,0));
+		
 		HBRUSH      NewBrush;	
 		POINT       Pt[4];
-		NewBrush = CreateSolidBrush(RGB(255, 0, 0));
+		NewBrush = CreateSolidBrush(RGB(255, 255, 255));
 		SelectObject(hDC, NewBrush);
 		Pt[0].x = x1; Pt[0].y = x2;
 		Pt[1].x = x3; Pt[1].y = x2;
 		Pt[2].x = x3; Pt[2].y = x4;
 		Pt[3].x = x1; Pt[3].y = x4;
 		Polygon(hDC, Pt, 4);
-		DeleteObject(NewBrush);
-	//		SelectObject(hDC, BrushYellow);
-		//	NewBrush = CreateSolidBrush(RGB(255, 255, 255));
-		SelectObject(hDC, NewBrush);
-		x1 = 10; x2 = 10; x3 = 30; x4 = 30;
-		Pt[0].x = x1; Pt[0].y = x2;
-		Pt[1].x = x3; Pt[1].y = x2;
-		Pt[2].x = x3; Pt[2].y = x4;
-		Pt[3].x = x1; Pt[3].y = x4;
-		Polygon(hDC, Pt, 4);
-		MoveToEx(hDC, x1, x2, NULL);
-		LineTo(hDC, x3, x2);
-		LineTo(hDC, x3, x4);
-		LineTo(hDC, x1, x4);
-		LineTo(hDC, x1, x2);
+		DeleteObject(NewBrush);		
 
 	}
 	EndPaint(hwnd, &Ps);
@@ -85,6 +70,15 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			poz_y = HIWORD(lParam);
 			hDC = BeginPaint(hwnd, &Ps);
 			hDC = GetWindowDC(hwnd);
+			if ((poz_x<10 || poz_y<10 || poz_x>1260 || poz_y>680))
+			{ 
+				poz_x = poz_y = 0; 
+				MessageBox(NULL,
+					(LPCSTR)"Alege un punct din zona incadrata!",
+					"Atentie!!!",
+					MB_ICONERROR);
+				break;
+			}
 			TextOut(hDC, poz_x + 7, poz_y + 23, "x", 1);
 
 			/*   char v[7];
@@ -107,13 +101,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 	}
 	else MessageBox(NULL,
-		(LPCSTR)"Nu ai citit Instructiunile!",
+		(LPCSTR)"Nu ai citit instructiunile!",
 		"Atentie!!!",
 		MB_ICONERROR);
 	break;
 	}
 	case WM_CREATE:
-	{/*HWND hWndButton = */CreateWindowEx(NULL,
+	{HICON hIcon;
+	
+	hIcon = (HICON)LoadImage(NULL, "tr.ico", IMAGE_ICON, 16, 16,0);
+
+		CreateWindowEx(NULL,
 		"BUTTON",
 		"Start!",
 		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
@@ -151,7 +149,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		NULL);
 	CreateWindowEx(NULL,
 		"BUTTON",
-		"Ajutor!",
+		"Instructiuni",
 		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
 		1265,
 		130,
@@ -173,7 +171,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	hDC = BeginPaint(hwnd, &Ps);
 	hDC = GetWindowDC(hwnd);
 	root = radacina("coord.txt");
-
+	poz_x = 0; poz_y = 0;
 	afisare_arbore(root, hDC);
 	ok_start = 1;
 	EndPaint(hwnd, &Ps);
@@ -181,11 +179,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	break; }
 
 	case IDC_HELP_BUTTON:
-	{	char buffer[256];
+	{	/*char buffer[256];
 	SendMessage(hEdit,
 		WM_GETTEXT,
 		sizeof(buffer) / sizeof(buffer[0]),
-		reinterpret_cast<LPARAM>(buffer));
+		reinterpret_cast<LPARAM>(buffer));*/
 	MessageBox(NULL,
 		(LPCSTR)fisier_help("ajutor.txt"),
 		"Ajutor",
@@ -201,7 +199,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			MB_ICONINFORMATION);
 	}
 	else MessageBox(NULL,
-		(LPCSTR)"Nu ai citit Instructiunile!",
+		(LPCSTR)"Nu ai selectat un punct din zona incadrata!\nAlege mai intai un punct din zona incadrata!",
 		"Atentie!!!",
 		MB_ICONERROR);
 	}	break;
@@ -216,7 +214,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			MB_ICONINFORMATION);
 	}
 	 else MessageBox(NULL,
-		(LPCSTR)"Nu ai citit Instructiunile!",
+		(LPCSTR)"Nu ai selectat un punct din zona incadrata!\nAlege mai intai un punct din zona incadrata!",
 		"Atentie!!!",
 		MB_ICONERROR);
 	}

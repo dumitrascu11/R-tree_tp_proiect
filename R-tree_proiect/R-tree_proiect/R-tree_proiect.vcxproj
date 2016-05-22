@@ -79,11 +79,18 @@
     <ClCompile Include="win32.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="rtree.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ajutor.txt" />
     <Text Include="coord.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="tr.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="R-tree_proiect.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
