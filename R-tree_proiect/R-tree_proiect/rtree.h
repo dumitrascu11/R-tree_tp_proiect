@@ -169,13 +169,6 @@ void localizare(rtree* root, int a, int b, char**sir)
 		{
 			if (punct_in_drept(root->children[i], a, b))
 			{
-				//	printf("Te aflii in zona:\n");
-			/*	printf("%d,", root->children[i]->x1);
-				printf("%d,", root->children[i]->x2);
-				printf("%d,", root->children[i]->x3);
-				printf("%d", root->children[i]->x4); strcpy(*sir, root->children[i]->nume);
-				printf("<%s>", *sir);
-				printf(" %s\n", root->children[i]->nume);*/
 				strcpy(*sir, root->children[i]->nume);
 				localizare((root->children[i]), a, b, sir);
 
